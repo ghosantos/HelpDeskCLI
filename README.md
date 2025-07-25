@@ -40,7 +40,7 @@ com.helpdesk
 
 1. Clone o repositório:
    ```bash
-   git clone https://github.com/seu-usuario/helpdesk-system.git
+   git clone https://github.com/ghosantos/helpdesk-system.git
    ```
 2. Abra em sua IDE Java favorita (Eclipse, IntelliJ, VS Code, etc).
 3. Crie uma classe `Main` com `main(String[] args)` e chame:
@@ -87,7 +87,7 @@ com.helpdesk
 
 ## ✍️ Autor
 
-- Gustavo — [LinkedIn](https://www.linkedin.com/in/gustavo-oliveira-1477922b3/)
+- Gustavo Oliveira — [LinkedIn](https://www.linkedin.com/in/gustavo-oliveira-1477922b3/)
 
 ---
 
