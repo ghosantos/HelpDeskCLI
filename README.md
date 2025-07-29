@@ -1,55 +1,47 @@
 # HelpDesk System 📞🛠️
 
-Sistema simples de HelpDesk em Java, com foco no fluxo de abertura e gerenciamento de chamados por clientes e técnicos.
+Este projeto simula um sistema de chamados de suporte técnico, desenvolvido inicialmente em **Java puro**, com foco em **orientação a objetos** e **boas práticas**. A ideia principal é gerenciar chamados técnicos com as funcionalidades abaixo.
 
-## 📋 Funcionalidades
+## ✅ Funcionalidades já implementadas
 
-### 👤 Cliente
-- Cadastro de cliente (nome e e-mail)
-- **Abrir novo chamado**, definindo descrição e prioridade (baixa, média, alta)
-- **Visualizar chamados abertos ou em andamento**
-- **Visualizar chamados finalizados (encerrados)**
+- [x] Cadastro e listagem de chamados
+- [x] Atribuição de chamados a técnicos
+- [x] Validação para impedir que um técnico assuma mais de 5 chamados simultâneos
+- [x] Fechamento de chamados com registro da data de encerramento
+- [x] Contador de chamados por técnico (incremento e decremento automático)
+- [x] Filtro de chamados por status (abertos, em andamento, fechados)
+- [x] Filtro de chamados por técnico responsável
+- [x] Validação para impedir que chamados sejam finalizados sem técnico atribuído
 
-### 🧑‍💻 Técnico
-- Cadastro de técnico (nome e e-mail)
-- **Visualizar todos os chamados abertos**
-- **Atribuir-se a um chamado** por ID (muda o status para PROGRESS)
-- **Visualizar seus chamados em andamento**
-- **Buscar chamado por ID**
-- **Finalizar chamado** (muda o status para CLOSED)
 
-## 🧱 Estrutura do Projeto
+## 🧠 Conceitos e práticas utilizadas
+
+- Encapsulamento e orientação a objetos
+- Responsabilidade única (SRP) aplicada em parte das classes
+- Uso de enums para status dos chamados
+- Validação de regras de negócio
+- Uso de listas e `Stream API` para filtros
+
+## 📁 Estrutura atual do projeto (Java puro)
 
 ```
 com.helpdesk
-├── entities
-│   ├── User.java (classe abstrata)
+├── model/
+│   ├── enums/
+│   │   ├── Priority.java
+│   │   ├── StatusCalled.java
+│   │   └── TypeUser.java
+│   ├── User.java      (classe abstrata)
 │   ├── Client.java
 │   ├── Technical.java
 │   └── Called.java
-│
-├── enums
-│   ├── Priority.java (LOW, MEDIUM, HIGH)
-│   └── StatusCalled.java (OPEN, PROGRESS, CLOSED)
-│
-├── service
-│   └── ServiceCalled.java (menu e lógica principal)
+├── service/
+│   └── ServiceCalled.java  (menu e lógica principal)
+└── view/
+    ├── Menu.java
+├── Main.java
+
 ```
-
-## ▶️ Como executar
-
-1. Clone o repositório:
-   ```bash
-   git clone https://github.com/ghosantos/helpdesk-system.git
-   ```
-2. Abra em sua IDE Java favorita (Eclipse, IntelliJ, VS Code, etc).
-3. Crie uma classe `Main` com `main(String[] args)` e chame:
-   ```java
-   Scanner sc = new Scanner(System.in);
-   ServiceCalled service = new ServiceCalled();
-   service.clientMenu(sc); // ou service.technicalMenu(sc);
-   ```
-4. Execute o projeto.
 
 ## 💡 Exemplos de uso
 
@@ -71,19 +63,22 @@ com.helpdesk
 0 - Sair
 ```
 
+## 🧭 Próximos passos e melhorias
+
+### 🚀 Migração para Spring Boot (em breve)
+
+- [ ] Criar estrutura de projeto com Spring Boot
+- [ ] Substituir entrada de dados via console por endpoints REST (API)
+- [ ] Implementar controle de usuários técnicos com Spring Security
+- [ ] Persistência dos chamados e técnicos com Spring Data JPA e banco relacional (PostgresSQL)
+- [ ] Implementar DTOs para comunicação entre camadas
+- [ ] Criar testes unitários e de integração
+
+
 ## ✅ Requisitos
 - Java 17 ou superior
 - IDE compatível com projetos Java
 
-## 🔮 Melhorias Futuras
-
-- Implementar persistência de login (lembrar usuário entre sessões)
-- Armazenar dados do usuário em arquivos `.txt` ou `.json`
-- Utilizar banco de dados para armazenar chamados e usuários
-- Criar sistema de autenticação com senha
-- Adicionar interface gráfica (GUI) com JavaFX ou Swing
-- Implementar filtros por data, status e cliente no histórico de chamados
-- Gerar relatórios de chamados em PDF ou CSV
 
 ## ✍️ Autor
 
