@@ -1,24 +1,22 @@
-package com.helpdesk.application;
+package com.helpdesk.view;
 
 import com.helpdesk.service.ServiceCalled;
 
 import java.util.Scanner;
 
-public class Main {
-    public static void main(String[]args){
+public class Menu {
 
-        Scanner sc = new Scanner(System.in);
+    ServiceCalled serviceCalled = new ServiceCalled();
 
-        ServiceCalled serviceCalled = new ServiceCalled();
-
-        int option;
+    int option;
+    public void showMenu(Scanner sc){
         do {
             System.out.print("""
-                    ==== SISTEMA DE CHAMADOS ====
-                    1 - Entrar como CLIENTE
-                    2 - Entrar como TÉCNICO
-                    0 - Sair
-                    """);
+                        ==== SISTEMA DE CHAMADOS ====
+                        1 - Entrar como CLIENTE
+                        2 - Entrar como TÉCNICO
+                        0 - Sair
+                        """);
             System.out.print("Opção: ");
             option = sc.nextInt();
 
@@ -39,4 +37,5 @@ public class Main {
             }
         }while (true);
     }
+
 }

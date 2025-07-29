@@ -1,6 +1,6 @@
-package com.helpdesk.entities;
+package com.helpdesk.model;
 
-import com.helpdesk.enums.TypeUser;
+import com.helpdesk.model.enums.TypeUser;
 
 public class Client extends User{
 

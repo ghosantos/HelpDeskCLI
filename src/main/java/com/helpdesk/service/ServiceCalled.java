@@ -1,17 +1,17 @@
 package com.helpdesk.service;
 
-import com.helpdesk.entities.Called;
-import com.helpdesk.entities.Client;
-import com.helpdesk.entities.Technical;
-import com.helpdesk.entities.User;
-import com.helpdesk.enums.Priority;
-import com.helpdesk.enums.StatusCalled;
-
+import com.helpdesk.model.Called;
+import com.helpdesk.model.Client;
+import com.helpdesk.model.Technical;
+import com.helpdesk.model.User;
+import com.helpdesk.model.enums.Priority;
+import com.helpdesk.model.enums.StatusCalled;
 
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class ServiceCalled {
     static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
@@ -30,8 +30,8 @@ public class ServiceCalled {
         System.out.print("Digite seu e-mail: ");
         String email = sc.next();
 
-        System.out.println(); //Line break
-        sc.nextLine(); //Clear buffer
+        System.out.println();
+        sc.nextLine();
 
         Client newClient = new Client(name, email);
         this.listUsers.add(newClient);
@@ -56,7 +56,7 @@ public class ServiceCalled {
                 case 1 ->{
                     System.out.print("Descrição do problema: ");
                     String description = sc.nextLine();
-                    System.out.println(); //Line break
+                    System.out.println();
 
                     System.out.print("""
                             Escolha a prioridade:
@@ -130,16 +130,16 @@ public class ServiceCalled {
         System.out.print("Digite seu e-mail: ");
         String email = sc.next();
 
-        System.out.println(); //Line break
-        sc.nextLine(); //Clear buffer
+        System.out.println();
+        sc.nextLine();
 
         Technical technical = new Technical(name, email);
         this.listUsers.add(technical);
 
         System.out.println("Bem-vindo, " + name + "!\n");
+
         int option;
         do {
-
             System.out.print("""
                     --- MENU TÉCNICO ---
                     1 - Ver chamados abertos
@@ -152,7 +152,7 @@ public class ServiceCalled {
                 System.out.print("Opção: ");
                 option = sc.nextInt();
 
-                System.out.println(); //Break line
+                System.out.println();
 
                 switch (option){
                     case 1 ->{
@@ -166,25 +166,25 @@ public class ServiceCalled {
                             }
                         }
 
-                        System.out.println(); //Break line
+                        System.out.println();
 
                         if (!foundOpen) {
                             System.out.println("Não possui chamados abertos.\n");
                         }
-
                         break;
                     }
 
                     case 2 ->{
                         System.out.print("Digite o ID do chamado que deseja assumir: ");
                         int id = sc.nextInt();
-
                         Called called = findCall(id);
 
                         if (called != null){
                             called.assignTechnician(technical);
                             System.out.println("Chamado atribuído com sucesso.");
                             System.out.println("Status atualizado para: EM_ANDAMENTO\n");
+                        }else {
+                            System.out.println("Chamado já atribuído ou limite de chamados excedido.\n");
                         }
 
                         break;
@@ -201,7 +201,7 @@ public class ServiceCalled {
                             }
                         }
 
-                        System.out.println(); // Break line
+                        System.out.println();
 
                         if (!hasProgress){
                             System.out.println("Você não possuí chamados em andamento.\n");
@@ -212,7 +212,7 @@ public class ServiceCalled {
                     case 4 ->{
                         System.out.print("Digite o ID do chamado: ");
                         int id = sc.nextInt();
-                        sc.nextLine(); //Clear buffer
+                        sc.nextLine();
 
                         Called called = findCall(id);
                         if (called != null){
@@ -223,28 +223,34 @@ public class ServiceCalled {
                     case 5 ->{
                         System.out.print("Digite o ID do chamado que deseja encerrar: ");
                         int id = sc.nextInt();
-                        sc.nextLine(); // Clear buffer
+                        sc.nextLine();
 
                         Called called = findCall(id);
 
-                        if (called != null) {
-                            called.closeTicket();
+                        if (called != null && called.closeTicket()) {
                             System.out.println("Chamado finalizado com sucesso!");
                             System.out.println("Data de fechamento: " + called.getClosedDate().format(FORMATTER) + "\n");
                         } else {
-                            System.out.println("ID ou chamado inexistente.\n");
+                            System.out.println("O chamado não pode ser finalizado antes de ser atribuído a um técnico.\n");
                         }
                         break;
                     }
+
+                    case 0 -> {
+                        System.out.println("Retornando ao Menu Principal...\n");
+                        return;
+                    }
                 }
 
-        }while (option != 0);
-
-
+        }while (true);
     }
 
     public Called findCall(int id){
         return listCalleds.stream().filter(c -> c.getId() == id).findFirst().orElse(null);
+    }
+
+    public List<Called> filterByTechnician(Technical technical){
+        return listCalleds.stream().filter(c -> technical.equals(c.getTechnical())).collect(Collectors.toList());
     }
 
 

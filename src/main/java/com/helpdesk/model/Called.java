@@ -1,7 +1,7 @@
-package com.helpdesk.entities;
+package com.helpdesk.model;
 
-import com.helpdesk.enums.Priority;
-import com.helpdesk.enums.StatusCalled;
+import com.helpdesk.model.enums.Priority;
+import com.helpdesk.model.enums.StatusCalled;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -15,14 +15,16 @@ public class Called {
     private Client client;
     private Technical technical;
 
-    //Informações necessárias para abertura do chamado
+    //Information required to open a ticket
     private String description;
     private StatusCalled statusCalled;
     private Priority priority;
 
     private LocalDateTime openingDate;
-    private LocalDateTime closedDate; //Pode ser nulo
+    private LocalDateTime closedDate; //Starts at zero until a call is closed
 
+
+    //Constructors
     public Called(){}
 
     public Called(Client client, String description, Priority priority) {
@@ -34,47 +36,51 @@ public class Called {
         this.openingDate = LocalDateTime.now();
     }
 
+    //Methods
+    public void assignTechnician(Technical technical) {
+        if (this.technical == null && technical.getCountCall() < 5){
+            this.technical = technical;
+            this.statusCalled = StatusCalled.PROGRESS;
+            technical.IncrementCallCount();
+        }
+    }
+
+    public Boolean closeTicket(){
+        if (technical != null){
+            this.closedDate = LocalDateTime.now();
+            this.statusCalled = StatusCalled.CLOSED;
+            technical.DecrementCallCount();
+            return true;
+        }
+        return false;
+    }
+
+    //Getters e Setters
     public int getId() {
         return id;
     }
-
     public Client getClient() {
         return client;
     }
-
+    public Technical getTechnical(){return technical;}
     public String getDescription() {
         return description;
     }
-
     public Priority getPriority() {
         return priority;
     }
-
     public StatusCalled getStatus() {
         return statusCalled;
     }
-
     public LocalDateTime getOpeningDate() {
         return openingDate;
     }
-
     public LocalDateTime getClosedDate() {
         return closedDate;
     }
 
-    //Métodos
-
-    public void assignTechnician(Technical technical) {
-        this.technical = technical;
-        this.statusCalled = StatusCalled.PROGRESS;
-    }
-
-    public void closeTicket(){
-        this.closedDate = LocalDateTime.now();
-        this.statusCalled = StatusCalled.CLOSED;
-    }
-
     public String toString() {
-        return String.format("#%d | %s | Prioridade: %s | Status: %s", id, description, priority, statusCalled);
+        String nameTechnical = (technical != null) ? technical.getName() : "Não atribuído";
+        return String.format("#%d | %s | Prioridade: %s | Status: %s | Técnico: %s ", id, description, priority, statusCalled, nameTechnical);
     }
 }
