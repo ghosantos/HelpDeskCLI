@@ -8,7 +8,7 @@ import java.time.format.DateTimeFormatter;
 
 public class Called {
     private static int nextId = 1;
-    static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+    public static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
 
     private Integer id;
 
@@ -38,21 +38,15 @@ public class Called {
 
     //Methods
     public void assignTechnician(Technical technical) {
-        if (this.technical == null && technical.getCountCall() < 5){
-            this.technical = technical;
-            this.statusCalled = StatusCalled.PROGRESS;
-            technical.IncrementCallCount();
-        }
+        this.technical = technical;
+        this.statusCalled = StatusCalled.PROGRESS;
+        this.technical.incrementCallCount();
     }
 
-    public Boolean closeTicket(){
-        if (technical != null){
-            this.closedDate = LocalDateTime.now();
-            this.statusCalled = StatusCalled.CLOSED;
-            technical.DecrementCallCount();
-            return true;
-        }
-        return false;
+    public void closeTicket(){
+        this.closedDate = LocalDateTime.now();
+        this.statusCalled = StatusCalled.CLOSED;
+        this.technical.decrementCallCount();
     }
 
     //Getters e Setters
