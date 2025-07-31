@@ -1,15 +1,25 @@
 package com.helpdesk.view;
 
+import com.helpdesk.model.Called;
+import com.helpdesk.model.User;
 import com.helpdesk.service.ServiceCalled;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Menu {
+    List<User> userList = new ArrayList<>();
+    List<Called> calledList = new ArrayList<>();
 
-    ServiceCalled serviceCalled = new ServiceCalled();
+    ServiceCalled serviceCalled = new ServiceCalled(userList, calledList);
 
-    int option;
+    ClientMenu clientMenu = new ClientMenu(serviceCalled);
+    TechnicalMenu technicalMenu = new TechnicalMenu(serviceCalled);
+
+
     public void showMenu(Scanner sc){
+        int option;
         do {
             System.out.print("""
                         ==== SISTEMA DE CHAMADOS ====
@@ -25,10 +35,10 @@ public class Menu {
 
             switch (option){
                 case 1 -> {
-                    serviceCalled.clientMenu(sc);
+                    clientMenu.showClientMenu(sc);
                 }
                 case 2 -> {
-                    serviceCalled.technicalMenu(sc);
+                    technicalMenu.showTechnical(sc);
                 }
                 case 0 -> {
                     System.out.println("Encerrando o programa...");
