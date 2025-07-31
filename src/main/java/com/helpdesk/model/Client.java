@@ -4,7 +4,7 @@ import com.helpdesk.model.enums.TypeUser;
 
 public class Client extends User{
 
-    public Client() {
+    public Client(Client client) {
         super();
     }
 
