@@ -58,7 +58,6 @@ public class TechnicalMenu {
                         System.out.println("Não possuí chamados abertos.");
                     }
                     System.out.println();
-                    break;
                 }
 
                 case 2 ->{
@@ -68,7 +67,6 @@ public class TechnicalMenu {
                     AssignCallResult result = serviceCalled.assignCall(id, newTechnical);
                     System.out.println(result);
                     System.out.println();
-                    break;
                 }
 
                 case 3 ->{
@@ -78,8 +76,6 @@ public class TechnicalMenu {
                         progressCalls.forEach(System.out::println);
                         System.out.println();
                     }else System.out.println("Não possuí chamados em_andamento.\n");
-
-                    break;
                 }
 
                 case 4 ->{
@@ -92,8 +88,6 @@ public class TechnicalMenu {
                     if (called != null){
                         System.out.println("\nChamado encontrado!\n" + called + "\n");
                     }else System.out.println("ID inexistente.\n");
-
-
                 }
 
                 case 5 ->{
@@ -109,7 +103,6 @@ public class TechnicalMenu {
                     }else {
                         System.out.println("O chamado não pode ser finalizado antes de ser atribuído a um técnico.\n");
                     }
-                    break;
                 }
 
                 case 0 -> {
