@@ -15,11 +15,11 @@ public class Technical extends User{
         this.countCall = 0;
     }
 
-    public void IncrementCallCount(){
+    public void incrementCallCount(){
         countCall ++;
     }
 
-    public void DecrementCallCount(){
+    public void decrementCallCount(){
         if (countCall > 0){
             countCall --;
         }
