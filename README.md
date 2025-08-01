@@ -1,6 +1,6 @@
 # HelpDesk System 📞🛠️
 
-Este projeto simula um sistema de chamados de suporte técnico, desenvolvido inicialmente em **Java puro**, com foco em **orientação a objetos** e **boas práticas**. A ideia principal é gerenciar chamados técnicos com as funcionalidades abaixo.
+Este projeto simula um sistema de chamados de suporte técnico, desenvolvido em **Java puro**, com foco em **orientação a objetos**, boas práticas e aprendizado de conceitos essenciais de engenharia de software.
 
 ## ✅ Funcionalidades já implementadas
 
@@ -13,14 +13,16 @@ Este projeto simula um sistema de chamados de suporte técnico, desenvolvido ini
 - [x] Filtro de chamados por técnico responsável
 - [x] Validação para impedir que chamados sejam finalizados sem técnico atribuído
 
-
 ## 🧠 Conceitos e práticas utilizadas
 
 - Encapsulamento e orientação a objetos
 - Responsabilidade única (SRP) aplicada em parte das classes
-- Uso de enums para status dos chamados
+- Uso de enums para status dos chamados e perfis de usuários
 - Validação de regras de negócio
-- Uso de listas e `Stream API` para filtros
+- Uso de listas e `Stream API` para filtros e buscas
+- Separação em camadas: model, service, view
+- Menu interativo via console (CLI)
+- Enum para prioridade dos chamados
 
 ## 📁 Estrutura atual do projeto (Java puro)
 
@@ -31,19 +33,23 @@ com.helpdesk
 │   │   ├── Priority.java
 │   │   ├── StatusCalled.java
 │   │   └── TypeUser.java
-│   ├── User.java      (classe abstrata)
+|       └── AssignCallResult.java
+│   ├── User.java      (abstract class)
 │   ├── Client.java
 │   ├── Technical.java
 │   └── Called.java
 ├── service/
-│   └── ServiceCalled.java  (menu e lógica principal)
+│   └── ServiceCalled.java  (menu and main logic)
 └── view/
     ├── Menu.java
+    ├── ClientMenu.java
+    └── TechnicalMenu.java
 ├── Main.java
-
 ```
 
 ## 💡 Exemplos de uso
+
+### Cliente
 
 ```text
 --- MENU CLIENTE ---
@@ -52,6 +58,8 @@ com.helpdesk
 3 - Chamados finalizados
 0 - Sair
 ```
+
+### Técnico
 
 ```text
 --- MENU TÉCNICO ---
@@ -65,20 +73,17 @@ com.helpdesk
 
 ## 🧭 Próximos passos e melhorias
 
-### 🚀 Migração para Spring Boot (em breve)
-
-- [ ] Criar estrutura de projeto com Spring Boot
-- [ ] Substituir entrada de dados via console por endpoints REST (API)
-- [ ] Implementar controle de usuários técnicos com Spring Security
+- [ ] Migração para Spring Boot
+- [ ] Criar endpoints REST (API) para operações
+- [ ] Implementar autenticação/autorização com Spring Security
 - [ ] Persistência dos chamados e técnicos com Spring Data JPA e banco relacional (PostgresSQL)
 - [ ] Implementar DTOs para comunicação entre camadas
 - [ ] Criar testes unitários e de integração
 
-
 ## ✅ Requisitos
+
 - Java 17 ou superior
 - IDE compatível com projetos Java
-
 
 ## ✍️ Autor
 
@@ -86,5 +91,4 @@ com.helpdesk
 
 ---
 
-> Este projeto é voltado ao aprendizado de Java com orientação a objetos, uso de listas, enums, scanner, controle de fluxo e estruturação em camadas simples.
-
+> Projeto de aprendizado com Java: orientação a objetos, listas, enums, scanner, controle de fluxo, estruturação em camadas e boas práticas!
