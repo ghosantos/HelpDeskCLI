@@ -1,6 +1,6 @@
 # HelpDesk System 📞🛠️
 
-Este projeto simula um sistema de chamados de suporte técnico, desenvolvido em **Java puro**, com foco em **orientação a objetos**, boas práticas e aprendizado de conceitos essenciais de engenharia de software.
+Este projeto simula um sistema de chamados de suporte técnico, desenvolvido em **Java puro**, com foco em **orientação a objetos** e boas práticas.
 
 ## ✅ Funcionalidades já implementadas
 
