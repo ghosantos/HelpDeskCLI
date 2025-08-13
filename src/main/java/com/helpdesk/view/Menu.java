@@ -17,7 +17,6 @@ public class Menu {
     ClientMenu clientMenu = new ClientMenu(serviceCalled);
     TechnicalMenu technicalMenu = new TechnicalMenu(serviceCalled);
 
-
     public void showMenu(Scanner sc){
         int option;
         do {
@@ -34,12 +33,10 @@ public class Menu {
             sc.nextLine(); // Clear buffer
 
             switch (option){
-                case 1 -> {
-                    clientMenu.showClientMenu(sc);
-                }
-                case 2 -> {
-                    technicalMenu.showTechnical(sc);
-                }
+                case 1 -> clientMenu.showClientMenu(sc);
+
+                case 2 -> technicalMenu.showTechnical(sc);
+
                 case 0 -> {
                     System.out.println("Encerrando o programa...");
                     return;
