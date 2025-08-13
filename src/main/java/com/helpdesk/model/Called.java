@@ -49,6 +49,11 @@ public class Called {
         this.technical.decrementCallCount();
     }
 
+    public boolean isClosed(){
+        return statusCalled.equals(StatusCalled.CLOSED);
+    }
+
+
     //Getters e Setters
     public int getId() {
         return id;
