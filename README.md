@@ -1,6 +1,7 @@
 # HelpDesk System 📞🛠️
 
-Este projeto simula um sistema de chamados de suporte técnico, desenvolvido em **Java puro**, com foco em **orientação a objetos** e boas práticas.
+Este projeto simula um **sistema de chamados de suporte técnico**, desenvolvido em **Java puro**, aplicando conceitos sólidos de **Orientação a Objetos (POO)** e boas práticas de programação.  
+O sistema é executado via **console (CLI)** e organiza o fluxo de atendimento entre **clientes** e **técnicos**, com validações e controle de regras de negócio.
 
 ## ✅ Funcionalidades já implementadas
 
@@ -12,17 +13,20 @@ Este projeto simula um sistema de chamados de suporte técnico, desenvolvido em 
 - [x] Filtro de chamados por status (abertos, em andamento, fechados)
 - [x] Filtro de chamados por técnico responsável
 - [x] Validação para impedir que chamados sejam finalizados sem técnico atribuído
+- [x] **Tratamento de entradas inválidas** com `try-catch` e `InputMismatchException`
+- [x] **Exceções personalizadas** (`DomainException`) para regras de negócio
 
 ## 🧠 Conceitos e práticas utilizadas
 
-- Encapsulamento e orientação a objetos
-- Responsabilidade única (SRP) aplicada em parte das classes
-- Uso de enums para status dos chamados e perfis de usuários
-- Validação de regras de negócio
-- Uso de listas e `Stream API` para filtros e buscas
-- Separação em camadas: model, service, view
-- Menu interativo via console (CLI)
-- Enum para prioridade dos chamados
+- **Encapsulamento** e princípios de **Orientação a Objetos**
+- **Responsabilidade Única (SRP)** em parte das classes
+- Uso de **Enums** para status, prioridade e perfis de usuários
+- **Validação de regras de negócio** antes de executar ações
+- **Java Stream API** para buscas e filtros
+- **Entrada de dados via `Scanner`**
+- **Tratamento de exceções** para evitar falhas na interação com o usuário
+- **Separação por camadas**: `model`, `service`, `view`
+- **Menus interativos** no console
 
 ## 📁 Estrutura atual do projeto (Java puro)
 
@@ -33,18 +37,20 @@ com.helpdesk
 │   │   ├── Priority.java
 │   │   ├── StatusCalled.java
 │   │   └── TypeUser.java
-|       └── AssignCallResult.java
-│   ├── User.java      (abstract class)
+│   ├── exceptions/
+│   │   └── DomainException.java    
+│   ├── AssignCallResult.java
+│   ├── User.java
 │   ├── Client.java
 │   ├── Technical.java
 │   └── Called.java
 ├── service/
-│   └── ServiceCalled.java  (menu and main logic)
+│   └── ServiceCalled.java
 └── view/
     ├── Menu.java
     ├── ClientMenu.java
-    └── TechnicalMenu.java
-├── Main.java
+    ├── TechnicalMenu.java
+└── Main.java
 ```
 
 ## 💡 Exemplos de uso
